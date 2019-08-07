@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Random people</string>
+    <string name="strPhone">Phone</string>
+    <string name="strPeopleList">People list</string>
+    <string name="strPeopleDetails">Contacts</string>
+    <string name="strAddress">Address</string>
+    <string name="strBirthdate">Birthdate</string>
+    <string name="strNationality">Nationality</string>
+    <string name="strEmail">Email</string>
+    <string name="strCompleteName">Complete name</string>
+    <string name="strPostalCode">Postal code</string>
+    <string name="strCell">Mobile phone</string>
+    <string name="strAge">Age</string>
+    <string name="strBornDate">Bord date</string>
+    <string name="strGender">Gender</string>
+    <string name="strDocument">Identity document</string>
+</resources>

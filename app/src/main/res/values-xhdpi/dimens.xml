@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="sizeImgPersonNormal">80dp</dimen>
+
+    <dimen name="sizeImgPersonLarge">200dp</dimen>
+
+    <dimen name="sizeIconSmall">30dp</dimen>
+
+    <dimen name="sizeToolbarHeight">90dp</dimen>
+
+    <dimen name="zeroSep">0dp</dimen>
+    <dimen name="oneSep">4dp</dimen>
+    <dimen name="twoSep">8dp</dimen>
+    <dimen name="threeSep">16dp</dimen>
+    <dimen name="fourSep">24dp</dimen>
+
+    <dimen name="sizeShadow">2dp</dimen>
+
+    <dimen name="radioCornerItem">5dp</dimen>
+
+    <dimen name="sizeWidthLineThin">1dp</dimen>
+
+    <dimen name="sizeTxtTitleActivity">26sp</dimen>
+
+    <dimen name="sizeTxtSubtitle">22sp</dimen>
+
+    <dimen name="sizeTxtNamePersonList">13sp</dimen>
+    <dimen name="sizeTxtNameCompanyNameList">18sp</dimen>
+
+    <dimen name="sizeTxtNamePersonDetail">30sp</dimen>
+    <dimen name="sizeTxtNameCompanyNameDetail">24sp</dimen>
+
+    <dimen name="sizeTextDetailInfo">18sp</dimen>
+
+</resources>
