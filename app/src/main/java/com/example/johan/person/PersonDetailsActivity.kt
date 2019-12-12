@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.layout_person_details_activity.*
 import kotlinx.android.synthetic.main.layout_person_details.*
-import com.example.johan.person.adapter.DetailInfoAdapter
+import com.example.johan.person.adapter.DetailInfoRecyclerViewAdapter
 import com.example.johan.person.response.DetailInfo
 import com.example.johan.person.response.*
 
@@ -81,7 +81,7 @@ class PersonDetailsActivity : AppCompatActivity() {
     }
     fun createRecyclerViewReviewList(data:ArrayList<DetailInfo>){
         viewManagerDetails = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        viewAdapterDetails = DetailInfoAdapter(data, this)
+        viewAdapterDetails = DetailInfoRecyclerViewAdapter(data, this)
         recyclerViewDetails = findViewById <RecyclerView>(R.id.rviewDetailInfo).apply {
             setHasFixedSize(false);
             layoutManager = viewManagerDetails

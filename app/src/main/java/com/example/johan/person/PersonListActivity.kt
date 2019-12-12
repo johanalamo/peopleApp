@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.arch.lifecycle.Observer
 import com.example.johan.person.viewmodel.PersonListViewModel
 import android.arch.lifecycle.ViewModelProviders
-import com.example.johan.person.adapter.PersonListAdapter
+import com.example.johan.person.adapter.PersonListRecyclerViewAdapter
 import com.example.johan.person.response.MapPerson
 
 class PersonListActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class PersonListActivity : AppCompatActivity() {
 
    fun createRecyclerViewPersonList(data:MapPerson, idRecyclerView:Int){
       viewManager = GridLayoutManager(this, 4)
-      viewAdapter = PersonListAdapter(data, this)
+      viewAdapter = PersonListRecyclerViewAdapter(data, this)
       recyclerView = findViewById <RecyclerView>(idRecyclerView).apply {
          setHasFixedSize(false)
          layoutManager = viewManager
