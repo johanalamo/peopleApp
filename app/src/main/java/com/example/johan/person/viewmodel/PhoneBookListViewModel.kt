@@ -3,6 +3,8 @@ package com.example.johan.person.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
+
 
 import okhttp3.*
 import java.io.IOException
@@ -30,19 +32,21 @@ class PersonListViewModel : ViewModel() {
             if (e::class == ConnectException::class)
                 msg = "ConnectException"
             println( "\n\n\n ************************ $msg  \n\n" + e.toString())
-
+            Log.d(this::class.java.simpleName, " -------   onFailure")
           }
 
           override fun onResponse(call: Call, response: Response) {
+            Log.d(this::class.java.simpleName, " -------   onResponse")
             var r = response.body()?.string()
-
             var gson = Gson()
             var data = gson.fromJson(r, RemoteDataResponse::class.java)
             var results = data.results
             val map = results?.associateBy({it.login?.uuid}, {it})
             try{
               phoneBookList.postValue(map)
+
             }catch(e:Exception){
+              Log.d(this::class.java.simpleName, " -------   onResponse inside catch exception", e)
               println("===============error, exception catched=====================")
               println(e)
             }

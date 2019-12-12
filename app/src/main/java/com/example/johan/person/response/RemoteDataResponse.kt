@@ -46,10 +46,16 @@ class DOB {
      @SerializedName("value") val value: String? = ""
  }
 class Location {
-    @SerializedName("street")   var street: String? = ""
+    @SerializedName("street")   var street: Street? = Street()
     @SerializedName("city")     val city: String? = ""
     @SerializedName("state")    val state: String? = ""
-    @SerializedName("postcode") val postcode: Int? = 0
+    @SerializedName("postcode") val postcode: String? = ""
+}
+
+class Street {
+  @SerializedName("number") var number: String? = ""
+  @SerializedName("name")   var name: String? = ""
+
 }
 
 class PersonPicture {

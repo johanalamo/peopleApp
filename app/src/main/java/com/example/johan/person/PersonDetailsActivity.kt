@@ -70,8 +70,8 @@ class PersonDetailsActivity : AppCompatActivity() {
       extra.add(DetailInfo(getString(R.string.strBornDate).toUpperCase() + ":", p?.dob?.date) )
       extra.add(DetailInfo(getString(R.string.strPhone).toUpperCase() + ":", p?.phone) )
       extra.add(DetailInfo(getString(R.string.strCell).toUpperCase() + ":", p?.cell) )
-      extra.add(DetailInfo(getString(R.string.strAddress).toUpperCase() + ":", p?.location?.street + "\n" + p?.location?.city + "\n" + p?.location?.state) )
-      extra.add(DetailInfo(getString(R.string.strPostalCode).toUpperCase() + ":", p?.location?.postcode.toString()) )
+      extra.add(DetailInfo(getString(R.string.strAddress).toUpperCase() + ":", p?.location?.street?.number + " - " + p?.location?.street?.name + "\n" + p?.location?.city + "\n" + p?.location?.state) )
+      extra.add(DetailInfo(getString(R.string.strPostalCode).toUpperCase() + ":", p?.location?.postcode) )
 
       return extra
     }
