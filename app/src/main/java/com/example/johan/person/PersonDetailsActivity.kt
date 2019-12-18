@@ -6,14 +6,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import kotlinx.android.synthetic.main.layout_person_details_activity.*
 import kotlinx.android.synthetic.main.layout_person_details.*
 import com.example.johan.person.adapter.DetailInfoRecyclerViewAdapter
 import com.example.johan.person.response.DetailInfo
 import com.example.johan.person.response.*
 
 import android.widget.ImageView
-import android.widget.Toast
 import com.squareup.picasso.Picasso
 
 fun ucFirst(s:String?):String? = if (s == null) null else s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase()
