@@ -26,7 +26,7 @@ class PersonListRecyclerViewAdapter(
 	}
 
 	override fun onBindViewHolder(holder: PersonListRecyclerViewViewHolder, position: Int) {
-		holder.updateImageWithUrl(data[position].picture?.thumbnail, context)
+		holder.updateImageWithUrl(data[position].picture?.thumbnail)
 		holder.linearLyt.txtName.text  = data[position].name?.first
 
 		holder.linearLyt.setOnClickListener {

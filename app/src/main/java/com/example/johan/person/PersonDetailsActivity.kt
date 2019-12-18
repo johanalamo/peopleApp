@@ -44,7 +44,6 @@ class PersonDetailsActivity : AppCompatActivity() {
 	}
 
 	private fun chargePerson(dataMap:MapPerson?){
-		val data = ArrayList(dataMap?.values)
 		val person = dataMap?.get(this.personId)
 		showDetailsOnUi(person)
 		var extra: ArrayList<DetailInfo> = getExtraData(person)
@@ -57,7 +56,6 @@ class PersonDetailsActivity : AppCompatActivity() {
 	}
 
 	private fun getExtraData(p:Person?): ArrayList<DetailInfo>{
-		var r: DetailInfo = DetailInfo()
 		var extra:ArrayList<DetailInfo> = ArrayList()
 
 		extra.add(DetailInfo(getString(R.string.strCompleteName).toUpperCase() + ":", ucFirst(p?.name?.title) + ". " + ucFirst(p?.name?.first) + " " + ucFirst(p?.name?.last) ) )
@@ -88,7 +86,7 @@ class PersonDetailsActivity : AppCompatActivity() {
 			adapter = viewAdapterDetails
 		}
 	}
-	
+
 	fun pressButton(view: View){
 		when (view.id)  {
 			R.id.btnBack -> finish()

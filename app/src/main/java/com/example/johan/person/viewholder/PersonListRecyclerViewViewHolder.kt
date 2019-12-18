@@ -11,7 +11,7 @@ import com.squareup.picasso.Callback
 class PersonListRecyclerViewViewHolder(val linearLyt: LinearLayout) : RecyclerView.ViewHolder(linearLyt) {
 	private val myImageView: ImageView = itemView.findViewById<ImageView>(R.id.imgPerson)
 
-	fun updateImageWithUrl(url: String?, c:AppCompatActivity) {
+	fun updateImageWithUrl(url: String?) {
 		Picasso.with(itemView.context).load(url).into(
 			myImageView,
 			object: Callback {
