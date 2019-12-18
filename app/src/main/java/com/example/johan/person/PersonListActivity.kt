@@ -7,10 +7,13 @@ import android.support.v7.widget.RecyclerView
 import android.arch.lifecycle.Observer
 import com.example.johan.person.viewmodel.PersonListViewModel
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import com.example.johan.person.adapter.PersonListRecyclerViewAdapter
 import com.example.johan.person.response.MapPerson
+import com.example.johan.person.listener.PersonListRecyclerViewClickListener
+import com.example.johan.person.response.Person
 
-class PersonListActivity : AppCompatActivity() {
+class PersonListActivity : AppCompatActivity(), PersonListRecyclerViewClickListener {
 
    private lateinit var recyclerView:RecyclerView
    private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -33,11 +36,16 @@ class PersonListActivity : AppCompatActivity() {
 
    fun createRecyclerViewPersonList(data:MapPerson, idRecyclerView:Int){
       viewManager = GridLayoutManager(this, 4)
-      viewAdapter = PersonListRecyclerViewAdapter(data, this)
+      viewAdapter = PersonListRecyclerViewAdapter(data, this, this)
       recyclerView = findViewById <RecyclerView>(idRecyclerView).apply {
          setHasFixedSize(false)
          layoutManager = viewManager
          adapter = viewAdapter
       }
+   }
+   override fun listItemClicked(person:Person){
+	   val intent:Intent = Intent(this, PersonDetailsActivity::class.java)
+	   intent.putExtra("p_id", person.login?.uuid)
+	   startActivity(intent)
    }
 }

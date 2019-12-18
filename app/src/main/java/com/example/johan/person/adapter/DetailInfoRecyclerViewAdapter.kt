@@ -10,11 +10,9 @@ import com.example.johan.person.response.DetailInfo
 import kotlinx.android.synthetic.main.layout_detailinfo_list_recycler_view.view.*
 import com.example.johan.person.viewholder.DetailInfoRecyclerViewViewHolder
 
-
 class DetailInfoRecyclerViewAdapter(private val data: ArrayList<DetailInfo>, private val context:AppCompatActivity) :
     RecyclerView.Adapter<DetailInfoRecyclerViewViewHolder>() {
 
-    // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): DetailInfoRecyclerViewViewHolder {
         val linearLyt = LayoutInflater.from(parent.context)
@@ -22,12 +20,10 @@ class DetailInfoRecyclerViewAdapter(private val data: ArrayList<DetailInfo>, pri
         return DetailInfoRecyclerViewViewHolder(linearLyt)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: DetailInfoRecyclerViewViewHolder, position: Int) {
         holder.linearLyt.txtTitle.text  = data[position].field
         holder.linearLyt.txtValue.text  = data[position].value
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = data.size
 }
