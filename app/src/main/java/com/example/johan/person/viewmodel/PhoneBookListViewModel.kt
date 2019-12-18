@@ -18,43 +18,45 @@ import com.example.johan.person.response.*
 import com.google.gson.Gson
 
 class PersonListViewModel : ViewModel() {
-   private val phoneBookList = MutableLiveData<MapPerson>()
+	private val phoneBookList = MutableLiveData<MapPerson>()
 
-    fun loadPersonListData() {
-      val client = OkHttpClient()
-      val request = Request.Builder().url(ConfigApp.getUrlPersonList()).build()
+	fun loadPersonListData() {
+		val client = OkHttpClient()
+		val request = Request.Builder().url(ConfigApp.getUrlPersonList()).build()
 
-      client.newCall(request).enqueue( object : Callback {
-          override fun onFailure(call: Call, e: IOException) {
-            var msg: String = ""
-            if (e::class == UnknownHostException::class)
-                msg = "UnknownHostException:"
-            if (e::class == ConnectException::class)
-                msg = "ConnectException"
-            println( "\n\n\n ************************ $msg  \n\n" + e.toString())
-            Log.d(this::class.java.simpleName, " -------   onFailure")
-          }
+		client.newCall(request).enqueue(
+			object : Callback {
+				override fun onFailure(call: Call, e: IOException) {
+					var msg: String = ""
+					if (e::class == UnknownHostException::class) {
+						msg = "UnknownHostException:"
+					}
+					if (e::class == ConnectException::class) {
+						msg = "ConnectException"
+					}
+					println( "\n\n\n ************************ $msg  \n\n" + e.toString())
+					Log.d(this::class.java.simpleName, " -------   onFailure")
+				}
 
-          override fun onResponse(call: Call, response: Response) {
-            Log.d(this::class.java.simpleName, " -------   onResponse")
-            var r = response.body()?.string()
-            var gson = Gson()
-            var data = gson.fromJson(r, RemoteDataResponse::class.java)
-            var results = data.results
-            val map = results?.associateBy({it.login?.uuid}, {it})
-            try{
-              phoneBookList.postValue(map)
-
-            }catch(e:Exception){
-              Log.d(this::class.java.simpleName, " -------   onResponse inside catch exception", e)
-              println("===============error, exception catched=====================")
-              println(e)
-            }
-          }
-      }
-      )
-    }
-    fun getPersonList(): LiveData<MapPerson> {
-        return phoneBookList
-    }
+				override fun onResponse(call: Call, response: Response) {
+					Log.d(this::class.java.simpleName, " -------   onResponse")
+					var r = response.body()?.string()
+					var gson = Gson()
+					var data = gson.fromJson(r, RemoteDataResponse::class.java)
+					var results = data.results
+					val map = results?.associateBy({it.login?.uuid}, {it})
+					try{
+						phoneBookList.postValue(map)
+					}catch(e:Exception){
+						Log.d(this::class.java.simpleName, " -------   onResponse inside catch exception", e)
+						println("===============error, exception catched=====================")
+						println(e)
+					}
+				}
+			}
+		)
+	}
+	fun getPersonList(): LiveData<MapPerson> {
+		return phoneBookList
+	}
 }

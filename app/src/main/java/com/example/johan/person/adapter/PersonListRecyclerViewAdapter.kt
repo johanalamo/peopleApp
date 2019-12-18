@@ -17,22 +17,22 @@ class PersonListRecyclerViewAdapter(
 			private val clickListener:PersonListRecyclerViewClickListener
 		) : RecyclerView.Adapter<PersonListRecyclerViewViewHolder>() {
 
-	private val data = ArrayList(dataMap.values)
+		private val data = ArrayList(dataMap.values)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonListRecyclerViewViewHolder {
-        val linearLyt = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_person_list_recycler_view, parent, false) as LinearLayout
-        return PersonListRecyclerViewViewHolder(linearLyt)
-    }
+		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonListRecyclerViewViewHolder {
+		val linearLyt = LayoutInflater.from(parent.context)
+			.inflate(R.layout.layout_person_list_recycler_view, parent, false) as LinearLayout
+		return PersonListRecyclerViewViewHolder(linearLyt)
+	}
 
-    override fun onBindViewHolder(holder: PersonListRecyclerViewViewHolder, position: Int) {
-        holder.updateImageWithUrl(data[position].picture?.thumbnail, context)
-        holder.linearLyt.txtName.text  = data[position].name?.first
+	override fun onBindViewHolder(holder: PersonListRecyclerViewViewHolder, position: Int) {
+		holder.updateImageWithUrl(data[position].picture?.thumbnail, context)
+		holder.linearLyt.txtName.text  = data[position].name?.first
 
-        holder.linearLyt.setOnClickListener {
+		holder.linearLyt.setOnClickListener {
 			clickListener.listItemClicked(data[position])
-        }
-    }
+		}
+	}
 
-    override fun getItemCount() = data.size
+	override fun getItemCount() = data.size
 }

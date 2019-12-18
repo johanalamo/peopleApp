@@ -13,8 +13,7 @@ import com.example.johan.person.viewholder.DetailInfoRecyclerViewViewHolder
 class DetailInfoRecyclerViewAdapter(private val data: ArrayList<DetailInfo>, private val context:AppCompatActivity) :
     RecyclerView.Adapter<DetailInfoRecyclerViewViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): DetailInfoRecyclerViewViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailInfoRecyclerViewViewHolder {
         val linearLyt = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_detailinfo_list_recycler_view, parent, false) as LinearLayout
         return DetailInfoRecyclerViewViewHolder(linearLyt)

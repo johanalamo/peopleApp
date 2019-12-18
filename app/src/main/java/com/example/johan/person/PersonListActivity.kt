@@ -15,37 +15,39 @@ import com.example.johan.person.response.Person
 
 class PersonListActivity : AppCompatActivity(), PersonListRecyclerViewClickListener {
 
-   private lateinit var recyclerView:RecyclerView
-   private lateinit var viewAdapter: RecyclerView.Adapter<*>
-   private lateinit var viewManager: RecyclerView.LayoutManager
+	private lateinit var recyclerView:RecyclerView
+	private lateinit var viewAdapter: RecyclerView.Adapter<*>
+	private lateinit var viewManager: RecyclerView.LayoutManager
 
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-      setContentView(R.layout.layout_person_list_activity)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.layout_person_list_activity)
 
-      DataRepository.viewModelPersonList = ViewModelProviders.of(this).get(PersonListViewModel::class.java)
-      DataRepository.viewModelPersonList.getPersonList().observe(this,
-               Observer {
-                  personList -> createRecyclerViewPersonList(personList!!, R.id.rviewPersonList)
-                  }
-      )
-      DataRepository.viewModelPersonList.loadPersonListData()
-      //hide Action bar
-      supportActionBar!!.hide()
-   }
+		DataRepository.viewModelPersonList = ViewModelProviders.of(this).get(PersonListViewModel::class.java)
+		DataRepository.viewModelPersonList.getPersonList().observe(
+			this,
+			Observer {
+				personList -> createRecyclerViewPersonList(personList!!, R.id.rviewPersonList)
+			}
+		)
+		DataRepository.viewModelPersonList.loadPersonListData()
+		//hide Action bar
+		supportActionBar!!.hide()
+	}
 
-   fun createRecyclerViewPersonList(data:MapPerson, idRecyclerView:Int){
-      viewManager = GridLayoutManager(this, 4)
-      viewAdapter = PersonListRecyclerViewAdapter(data, this, this)
-      recyclerView = findViewById <RecyclerView>(idRecyclerView).apply {
-         setHasFixedSize(false)
-         layoutManager = viewManager
-         adapter = viewAdapter
-      }
-   }
-   override fun listItemClicked(person:Person){
-	   val intent:Intent = Intent(this, PersonDetailsActivity::class.java)
-	   intent.putExtra("p_id", person.login?.uuid)
-	   startActivity(intent)
-   }
+	fun createRecyclerViewPersonList(data:MapPerson, idRecyclerView:Int){
+		viewManager = GridLayoutManager(this, 4)
+		viewAdapter = PersonListRecyclerViewAdapter(data, this, this)
+		recyclerView = findViewById <RecyclerView>(idRecyclerView).apply {
+			setHasFixedSize(false)
+			layoutManager = viewManager
+			adapter = viewAdapter
+		}
+	}
+
+	override fun listItemClicked(person:Person){
+		val intent:Intent = Intent(this, PersonDetailsActivity::class.java)
+		intent.putExtra("p_id", person.login?.uuid)
+		startActivity(intent)
+	}
 }

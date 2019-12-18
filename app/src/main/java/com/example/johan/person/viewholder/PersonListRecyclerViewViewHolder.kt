@@ -9,15 +9,15 @@ import com.example.johan.person.R
 import com.squareup.picasso.Callback
 
 class PersonListRecyclerViewViewHolder(val linearLyt: LinearLayout) : RecyclerView.ViewHolder(linearLyt) {
-    private val myImageView: ImageView = itemView.findViewById<ImageView>(R.id.imgPerson)
+	private val myImageView: ImageView = itemView.findViewById<ImageView>(R.id.imgPerson)
 
-    fun updateImageWithUrl(url: String?, c:AppCompatActivity) {
-     Picasso.with(itemView.context).load(url).into(myImageView,
-         object
-             : Callback {
-             override fun onSuccess() {}
-             override fun onError() {}
-         }
-        )
-      }
+	fun updateImageWithUrl(url: String?, c:AppCompatActivity) {
+		Picasso.with(itemView.context).load(url).into(
+			myImageView,
+			object: Callback {
+				override fun onSuccess() {}
+				override fun onError() {}
+			}
+		)
+	}
 }
