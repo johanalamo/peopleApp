@@ -106,7 +106,7 @@ class PersonDetailsActivity : AppCompatActivity() {
 
     fun createRecyclerViewReviewList(data: ArrayList<DetailInfo>) {
         viewManagerDetails = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        viewAdapterDetails = DetailInfoRecyclerViewAdapter(data, this)
+        viewAdapterDetails = DetailInfoRecyclerViewAdapter(data)
         recyclerViewDetails = findViewById<RecyclerView>(R.id.rviewDetailInfo).apply {
             setHasFixedSize(false);
             layoutManager = viewManagerDetails

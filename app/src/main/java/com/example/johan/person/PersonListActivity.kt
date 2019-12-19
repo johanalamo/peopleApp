@@ -38,7 +38,7 @@ class PersonListActivity : AppCompatActivity(), PersonListRecyclerViewAdapter.Cl
 
     fun createRecyclerViewPersonList(data: MapPerson, idRecyclerView: Int) {
         viewManager = GridLayoutManager(this, 4)
-        viewAdapter = PersonListRecyclerViewAdapter(data, this, this)
+        viewAdapter = PersonListRecyclerViewAdapter(data, this)
         recyclerView = findViewById<RecyclerView>(idRecyclerView).apply {
             setHasFixedSize(false)
             layoutManager = viewManager

@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.layout_person_list_recycler_view.view.*
 
 class PersonListRecyclerViewAdapter(
     private val dataMap: MapPerson,
-    private val context: AppCompatActivity,
     private val clickListener: PersonListRecyclerViewAdapter.ClickListener
 ) : RecyclerView.Adapter<PersonListRecyclerViewAdapter.ViewHolder>() {
 
