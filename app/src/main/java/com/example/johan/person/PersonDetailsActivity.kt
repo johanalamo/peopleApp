@@ -29,7 +29,7 @@ class PersonDetailsActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.layout_person_details_activity)
 		try {
-			this.personId = getIntent().getExtras().getString("p_id")
+			this.personId = getIntent()?.getExtras()?.getString("p_id") ?: ""
 		} catch (e: Exception) {
 			this.personId = "1"
 		}
