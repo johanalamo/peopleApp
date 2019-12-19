@@ -8,21 +8,25 @@ import android.support.v7.app.AppCompatActivity
 import com.example.johan.person.R
 import com.example.johan.person.response.DetailInfo
 import kotlinx.android.synthetic.main.layout_detailinfo_list_recycler_view.view.*
-import com.example.johan.person.viewholder.DetailInfoRecyclerViewViewHolder
+
 
 class DetailInfoRecyclerViewAdapter(private val data: ArrayList<DetailInfo>, private val context:AppCompatActivity) :
-    RecyclerView.Adapter<DetailInfoRecyclerViewViewHolder>() {
+    RecyclerView.Adapter<DetailInfoRecyclerViewAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailInfoRecyclerViewViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailInfoRecyclerViewAdapter.ViewHolder {
         val linearLyt = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_detailinfo_list_recycler_view, parent, false) as LinearLayout
-        return DetailInfoRecyclerViewViewHolder(linearLyt)
+        return DetailInfoRecyclerViewAdapter.ViewHolder(linearLyt)
     }
 
-    override fun onBindViewHolder(holder: DetailInfoRecyclerViewViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailInfoRecyclerViewAdapter.ViewHolder, position: Int) {
         holder.linearLyt.txtTitle.text  = data[position].field
         holder.linearLyt.txtValue.text  = data[position].value
     }
 
     override fun getItemCount() = data.size
+
+    //internal objects and interfaces
+    class ViewHolder(val linearLyt: LinearLayout) : RecyclerView.ViewHolder(linearLyt)
+
 }

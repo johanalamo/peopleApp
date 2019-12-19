@@ -10,10 +10,9 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import com.example.johan.person.adapter.PersonListRecyclerViewAdapter
 import com.example.johan.person.response.MapPerson
-import com.example.johan.person.listener.PersonListRecyclerViewClickListener
 import com.example.johan.person.response.Person
 
-class PersonListActivity : AppCompatActivity(), PersonListRecyclerViewClickListener {
+class PersonListActivity : AppCompatActivity(), PersonListRecyclerViewAdapter.ClickListener {
 
 	private lateinit var recyclerView:RecyclerView
 	private lateinit var viewAdapter: RecyclerView.Adapter<*>
