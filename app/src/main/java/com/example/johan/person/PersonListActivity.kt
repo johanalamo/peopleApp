@@ -1,54 +1,54 @@
 package com.example.johan.person
 
-import DataRepository
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.example.johan.person.adapter.PersonListRecyclerViewAdapter
-import com.example.johan.person.response.MapPerson
-import com.example.johan.person.response.Person
-import com.example.johan.person.viewmodel.PersonListViewModel
+import android.util.Log
+import android.widget.FrameLayout
 
-class PersonListActivity : AppCompatActivity(), PersonListRecyclerViewAdapter.ClickListener {
+class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInteractionListener {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private val TAG: String = PersonListActivity::class.java.simpleName
+
+    private var isLargeScreen: Boolean = false
+
+    private var personListFragment: PersonListFragment = PersonListFragment.newInstance()
+
+//    private var personDetailsFragment: PersonDetailsFragment? = null
+
+    private var fragmentContainer: FrameLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.layout_person_list_activity)
 
-        DataRepository.viewModelPersonList =
-            ViewModelProviders.of(this).get(PersonListViewModel::class.java)
-        DataRepository.viewModelPersonList.getPersonList().observe(
-            this,
-            Observer { personList ->
-                createRecyclerViewPersonList(personList!!, R.id.rviewPersonList)
-            }
-        )
-        DataRepository.viewModelPersonList.loadPersonListData()
+        personListFragment = supportFragmentManager.findFragmentById(R.id.person_list_fragment) as PersonListFragment
+
+        //aqui
+//        fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container  XXXXXXXXXxxx)
+
+
+        isLargeScreen = fragmentContainer != null
+
         //hide Action bar
         supportActionBar!!.hide()
     }
 
-    fun createRecyclerViewPersonList(data: MapPerson, idRecyclerView: Int) {
-        viewManager = GridLayoutManager(this, 4)
-        viewAdapter = PersonListRecyclerViewAdapter(data, this)
-        recyclerView = findViewById<RecyclerView>(idRecyclerView).apply {
-            setHasFixedSize(false)
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }
+
+    override fun onListItemClicked (valor: String?) {
+        showPersonDetail(valor)
     }
 
-    override fun listItemClicked(person: Person) {
+    fun showPersonDetail(valor: String?) {
+        Log.d(TAG, "----------- showPersonDetail: valor -> " + valor)
+
         val intent: Intent = Intent(this, PersonDetailsActivity::class.java)
-        intent.putExtra("p_id", person.login?.uuid)
+        Log.d(TAG, "----------- showPersonDetail: 2 ")
+        intent.putExtra("p_id", valor) //person.login?.uuid)
+        Log.d(TAG, "----------- showPersonDetail: 3 ")
         startActivity(intent)
+        Log.d(TAG, "----------- showPersonDetail: 4 ")
     }
 }

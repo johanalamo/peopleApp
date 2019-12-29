@@ -14,4 +14,7 @@
     <string name="strBornDate">Bord date</string>
     <string name="strGender">Gender</string>
     <string name="strDocument">Identity document</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

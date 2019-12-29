@@ -34,7 +34,7 @@ class PersonListRecyclerViewAdapter(
         holder.linearLyt.txtName.text = data[position].name?.first
 
         holder.linearLyt.setOnClickListener {
-            clickListener.listItemClicked(data[position])
+            clickListener.listItemClicked(data[position].login?.uuid)
         }
     }
 
@@ -42,7 +42,7 @@ class PersonListRecyclerViewAdapter(
 
     //internal class and interfaces
     interface ClickListener {
-        fun listItemClicked(person: Person)
+        fun listItemClicked(valor: String?)
     }
 
 
