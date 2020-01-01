@@ -13,24 +13,41 @@ class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInt
 
     private var isLargeScreen: Boolean = false
 
-    private var personListFragment: PersonListFragment = PersonListFragment.newInstance()
+    private  var personListFragment: PersonListFragment? = null //= PersonListFragment.newInstance()
 
-//    private var personDetailsFragment: PersonDetailsFragment? = null
+    private var personDetailsFragment: PersonDetailsFragment? = null
 
     private var fragmentContainer: FrameLayout? = null
+    private var mainFragmentContainer: FrameLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.layout_person_list_activity)
 
-        personListFragment = supportFragmentManager.findFragmentById(R.id.person_list_fragment) as PersonListFragment
+        fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
+        isLargeScreen = fragmentContainer != null
+
+        var p_cols = if (isLargeScreen) 2 else 4
+
+
+
+        mainFragmentContainer = findViewById<FrameLayout>(R.id.main_fragment_container)
+
+        personListFragment = PersonListFragment.newInstance(p_cols)
+        personListFragment?.let {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, it, getString(R.string.list_fragment_tag))
+                .addToBackStack(null)
+                .commit()
+        }
+
+
+//        personListFragment = supportFragmentManager.findFragmentById(R.id.person_list_fragment) as PersonListFragment
 
         //aqui
-//        fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container  XXXXXXXXXxxx)
 
 
-        isLargeScreen = fragmentContainer != null
 
         //hide Action bar
         supportActionBar!!.hide()
@@ -42,13 +59,22 @@ class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInt
     }
 
     fun showPersonDetail(valor: String?) {
-        Log.d(TAG, "----------- showPersonDetail: valor -> " + valor)
+        Log.d(TAG, "------ isLargeScreen: " + isLargeScreen.toString())
 
-        val intent: Intent = Intent(this, PersonDetailsActivity::class.java)
-        Log.d(TAG, "----------- showPersonDetail: 2 ")
-        intent.putExtra("p_id", valor) //person.login?.uuid)
-        Log.d(TAG, "----------- showPersonDetail: 3 ")
-        startActivity(intent)
-        Log.d(TAG, "----------- showPersonDetail: 4 ")
+        if (!isLargeScreen) {
+            val intent: Intent = Intent(this, PersonDetailsActivity::class.java)
+            intent.putExtra("p_id", valor) //person.login?.uuid)
+            startActivity(intent)
+        }else {
+//            title = list.name
+            personDetailsFragment = PersonDetailsFragment.newInstance(valor)
+            personDetailsFragment?.let {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, it, getString(R.string.list_fragment_tag))
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.example.johan.person.adapter
 
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -18,6 +19,8 @@ class PersonListRecyclerViewAdapter(
     private val clickListener: PersonListRecyclerViewAdapter.ClickListener
 ) : RecyclerView.Adapter<PersonListRecyclerViewAdapter.ViewHolder>() {
 
+    private val TAG = PersonListRecyclerViewAdapter::class.java.simpleName
+
     private val data = ArrayList(dataMap.values)
 
     override fun onCreateViewHolder(
@@ -32,10 +35,10 @@ class PersonListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: PersonListRecyclerViewAdapter.ViewHolder, position: Int) {
         holder.updateImageWithUrl(data[position].picture?.thumbnail)
         holder.linearLyt.txtName.text = data[position].name?.first
-
         holder.linearLyt.setOnClickListener {
             clickListener.listItemClicked(data[position].login?.uuid)
         }
+        Log.d(TAG, " ------  PersonListRecyclerViewAdapter.onBindViewHolder.position = " + position.toString())
     }
 
     override fun getItemCount() = data.size

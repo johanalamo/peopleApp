@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.example.johan.person.viewmodel.PersonListViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "cols"
 
 /**
  * A simple [Fragment] subclass.
@@ -28,7 +30,12 @@ import com.example.johan.person.viewmodel.PersonListViewModel
  * create an instance of this fragment.
  */
 class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListener {
+    private var TAG = PersonListFragment::class.java.simpleName
     // TODO: Rename and change types of parameters
+    private var cols: Int = 3
+
+
+
     private var listener: OnFragmentInteractionListener? = null
 
 
@@ -39,6 +46,10 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            cols = it.getString(ARG_PARAM1).toInt()
+            Log.d(TAG, " ----- onCreate -> cols -> " + cols.toString())
+        }
 
     }
 
@@ -89,7 +100,7 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
 
     fun createRecyclerViewPersonList(data: MapPerson, idRecyclerView: Int) {
         view?.let {
-            viewManager = GridLayoutManager(context, 4)
+            viewManager = GridLayoutManager(context, cols)
             viewAdapter = PersonListRecyclerViewAdapter(data, this)
             recyclerView = it.findViewById<RecyclerView>(idRecyclerView).apply {
                 setHasFixedSize(false)
@@ -128,6 +139,11 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance() = PersonListFragment()
+        fun newInstance(cols: Int) =
+            PersonListFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, cols.toString())
+                }
+            }
     }
 }
