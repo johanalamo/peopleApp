@@ -38,14 +38,11 @@ class PersonDetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var personId: String? = null
 
-
-
     private lateinit var recyclerViewDetails: RecyclerView
     private lateinit var viewAdapterDetails: RecyclerView.Adapter<*>
     private lateinit var viewManagerDetails: RecyclerView.LayoutManager
 
     private lateinit var imgPerson: ImageView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,20 +143,6 @@ class PersonDetailsFragment : Fragment() {
 
         return extra
     }
-
-
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
-
 
     companion object {
         /**

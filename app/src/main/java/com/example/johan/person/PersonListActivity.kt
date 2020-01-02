@@ -18,21 +18,16 @@ class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInt
     private var personDetailsFragment: PersonDetailsFragment? = null
 
     private var fragmentContainer: FrameLayout? = null
-    private var mainFragmentContainer: FrameLayout? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.layout_person_list_activity)
 
         fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
         isLargeScreen = fragmentContainer != null
 
         var p_cols = if (isLargeScreen) 2 else 4
-
-
-
-        mainFragmentContainer = findViewById<FrameLayout>(R.id.main_fragment_container)
 
         personListFragment = PersonListFragment.newInstance(p_cols)
         personListFragment?.let {
@@ -41,13 +36,6 @@ class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInt
                 .addToBackStack(null)
                 .commit()
         }
-
-
-//        personListFragment = supportFragmentManager.findFragmentById(R.id.person_list_fragment) as PersonListFragment
-
-        //aqui
-
-
 
         //hide Action bar
         supportActionBar!!.hide()
@@ -58,7 +46,7 @@ class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInt
         showPersonDetail(valor)
     }
 
-    fun showPersonDetail(valor: String?) {
+    private fun showPersonDetail(valor: String?) {
         Log.d(TAG, "------ isLargeScreen: " + isLargeScreen.toString())
 
         if (!isLargeScreen) {

@@ -8,8 +8,6 @@
     tools:showIn="@layout/layout_person_list_activity"
     tools:context=".PersonListActivity">
 <!--    app:layout_behavior="@string/appbar_scrolling_view_behavior"   -->
-
-
     <FrameLayout
         android:id="@+id/main_fragment_container"
         android:layout_width="300dp"
@@ -23,23 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-
-    <!--
-        <fragment
-            android:id="@+id/person_list_fragment"
-            android:name="com.example.johan.person.PersonListFragment"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-    -->
     <!-- 2 -->
     <FrameLayout
         android:id="@+id/fragment_container"
@@ -55,6 +36,4 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/main_fragment_container"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 </android.support.constraint.ConstraintLayout>

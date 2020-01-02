@@ -34,20 +34,16 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
     // TODO: Rename and change types of parameters
     private var cols: Int = 3
 
-
-
     private var listener: OnFragmentInteractionListener? = null
-
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            cols = it.getString(ARG_PARAM1).toInt()
+            cols = it.getString(ARG_PARAM1, "2").toInt()
             Log.d(TAG, " ----- onCreate -> cols -> " + cols.toString())
         }
 
@@ -69,8 +65,6 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
-
-
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
@@ -84,7 +78,6 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         DataRepository.viewModelPersonList =
             ViewModelProviders.of(this).get(PersonListViewModel::class.java)
         DataRepository.viewModelPersonList.getPersonList().observe(
@@ -94,9 +87,7 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
             }
         )
         DataRepository.viewModelPersonList.loadPersonListData()
-
     }
-
 
     fun createRecyclerViewPersonList(data: MapPerson, idRecyclerView: Int) {
         view?.let {
