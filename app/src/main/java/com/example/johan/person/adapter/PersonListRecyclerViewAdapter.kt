@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -27,15 +28,15 @@ class PersonListRecyclerViewAdapter(
         parent: ViewGroup,
         viewType: Int
     ): PersonListRecyclerViewAdapter.ViewHolder {
-        val linearLyt = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_person_list_recycler_view, parent, false) as LinearLayout
-        return PersonListRecyclerViewAdapter.ViewHolder(linearLyt)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.layout_person_list_recycler_view, parent, false) as View
+        return PersonListRecyclerViewAdapter.ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PersonListRecyclerViewAdapter.ViewHolder, position: Int) {
         holder.updateImageWithUrl(data[position].picture?.thumbnail)
-        holder.linearLyt.txtName.text = data[position].name?.first
-        holder.linearLyt.setOnClickListener {
+        holder.view.txtName.text = data[position].name?.first
+        holder.view.setOnClickListener {
             clickListener.listItemClicked(data[position].login?.uuid)
         }
         Log.d(TAG, " ------  PersonListRecyclerViewAdapter.onBindViewHolder.position = " + position.toString())
@@ -49,7 +50,7 @@ class PersonListRecyclerViewAdapter(
     }
 
 
-    class ViewHolder(val linearLyt: LinearLayout) : RecyclerView.ViewHolder(linearLyt) {
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val myImageView: ImageView = itemView.findViewById<ImageView>(R.id.imgPerson)
 
         fun updateImageWithUrl(url: String?) {

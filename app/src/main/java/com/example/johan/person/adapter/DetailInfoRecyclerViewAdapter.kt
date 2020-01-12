@@ -2,6 +2,7 @@ package com.example.johan.person.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.johan.person.R
@@ -18,19 +19,19 @@ class DetailInfoRecyclerViewAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val linearLyt = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_detailinfo_list_recycler_view, parent, false) as LinearLayout
-        return ViewHolder(linearLyt)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.layout_detailinfo_list_recycler_view, parent, false) as View
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: DetailInfoRecyclerViewAdapter.ViewHolder, position: Int) {
-        holder.linearLyt.txtTitle.text = data[position].field
-        holder.linearLyt.txtValue.text = data[position].value
+        holder.view.txtTitle.text = data[position].field
+        holder.view.txtValue.text = data[position].value
     }
 
     override fun getItemCount() = data.size
 
     //internal objects and interfaces
-    class ViewHolder(val linearLyt: LinearLayout) : RecyclerView.ViewHolder(linearLyt)
+    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
 }

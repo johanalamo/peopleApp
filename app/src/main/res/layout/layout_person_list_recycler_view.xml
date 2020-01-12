@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/linearLayoutOneProduct"
-              android:orientation="vertical"
-              style="@style/stlPersonListItem"
->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    card_view:cardCornerRadius="2dp">
+
     <LinearLayout
-            android:orientation="vertical"
+        android:id="@+id/linearLayoutOneProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-    >
-        <ImageView
+            android:orientation="vertical">
+
+            <ImageView
                 android:id="@+id/imgPerson"
-                style="@style/stlImgPersonNormal"
-        />
-        <TextView
-                android:text="TextView"
+                style="@style/stlImgPersonNormal" />
+
+            <TextView
+                android:id="@+id/txtName"
                 style="@style/stlPersonNameNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtName"
-        />
+                android:text="TextView" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.v7.widget.CardView>
