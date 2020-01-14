@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.layout_person_list_view_holder.view.*
 
 class PersonListRecyclerViewAdapter(
     private val dataMap: MapPerson,
-    private val clickListener: PersonListRecyclerViewAdapter.ClickListener
+    private val clickListener: ClickListener
 ) : RecyclerView.Adapter<PersonListRecyclerViewAdapter.ViewHolder>() {
 
     private val TAG = PersonListRecyclerViewAdapter::class.java.simpleName
@@ -24,10 +24,10 @@ class PersonListRecyclerViewAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PersonListRecyclerViewAdapter.ViewHolder {
+    ): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_person_list_view_holder, parent, false) as View
-        return PersonListRecyclerViewAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PersonListRecyclerViewAdapter.ViewHolder, position: Int) {

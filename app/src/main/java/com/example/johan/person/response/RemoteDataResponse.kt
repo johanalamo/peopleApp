@@ -3,7 +3,6 @@ package com.example.johan.person.response
 import com.google.gson.annotations.SerializedName
 
 typealias  MapPerson = Map<String?, Person>
-//data class PhoneBookListResponse = Array<Product>
 
 class RemoteDataResponse {
     @SerializedName("results")

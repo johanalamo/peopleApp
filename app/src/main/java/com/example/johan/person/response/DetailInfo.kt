@@ -1,9 +1,7 @@
 package com.example.johan.person.response
 
-class DetailInfo(fl: String?, vl: String?) { //primary constructor
-    //create default getter and setter
+class DetailInfo(fl: String?, vl: String?) {
     var field: String?
-    //replace getter and setter
     var value: String?
 
     init {
@@ -11,9 +9,7 @@ class DetailInfo(fl: String?, vl: String?) { //primary constructor
         this.value = vl
     }
 
-    //second constructor
     constructor (fl: String) : this(fl, null)
 
-    //fourth constructor
     constructor () : this(null, null)
 }

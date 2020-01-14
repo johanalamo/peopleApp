@@ -60,16 +60,13 @@ class PersonDetailsFragment : Fragment() {
 
         val personList = DataRepository.viewModelPersonList.getPersonList()
 
-//        chargePerson(personList.value, inflater, container)
 
         var dataMap = personList.value
         val person = dataMap?.get(this.personId)
 
         Log.d(TAG, "--------- person.name: -> " + person?.name?.first + " " + person?.name?.last)
-//        showDetailsOnUi(person)
         var extra: ArrayList<DetailInfo> = getExtraData(person)
         var urlImage = person?.picture?.large
-//        createRecyclerViewReviewList(extra, inflater, container, urlImage)
 
         view?.let {
             Log.d(TAG, " ----- inside view")
