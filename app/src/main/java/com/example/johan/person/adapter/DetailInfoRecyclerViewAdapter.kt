@@ -4,10 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.example.johan.person.R
 import com.example.johan.person.response.DetailInfo
-import kotlinx.android.synthetic.main.layout_detailinfo_list_recycler_view.view.*
+import kotlinx.android.synthetic.main.layout_detailinfo_list_view_holder.view.*
 
 
 class DetailInfoRecyclerViewAdapter(
@@ -20,7 +19,7 @@ class DetailInfoRecyclerViewAdapter(
         viewType: Int
     ): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_detailinfo_list_recycler_view, parent, false) as View
+            .inflate(R.layout.layout_detailinfo_list_view_holder, parent, false) as View
         return ViewHolder(view)
     }
 

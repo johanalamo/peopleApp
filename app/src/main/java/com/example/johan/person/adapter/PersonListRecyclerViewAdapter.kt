@@ -1,19 +1,16 @@
 package com.example.johan.person.adapter
 
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import com.example.johan.person.R
 import com.example.johan.person.response.MapPerson
-import com.example.johan.person.response.Person
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.layout_person_list_recycler_view.view.*
+import kotlinx.android.synthetic.main.layout_person_list_view_holder.view.*
 
 class PersonListRecyclerViewAdapter(
     private val dataMap: MapPerson,
@@ -29,7 +26,7 @@ class PersonListRecyclerViewAdapter(
         viewType: Int
     ): PersonListRecyclerViewAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_person_list_recycler_view, parent, false) as View
+            .inflate(R.layout.layout_person_list_view_holder, parent, false) as View
         return PersonListRecyclerViewAdapter.ViewHolder(view)
     }
 
