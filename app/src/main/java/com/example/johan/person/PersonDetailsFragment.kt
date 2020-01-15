@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.johan.person.adapter.DetailInfoRecyclerViewAdapter
+import com.example.johan.person.adapter.DetailsAdapter
 import com.example.johan.person.response.DetailInfo
 import com.example.johan.person.response.MapPerson
 import com.example.johan.person.response.Person
@@ -65,7 +66,7 @@ class PersonDetailsFragment : Fragment() {
         val person = dataMap?.get(this.personId)
 
         Log.d(TAG, "--------- person.name: -> " + person?.name?.first + " " + person?.name?.last)
-        var extra: ArrayList<DetailInfo> = getExtraData(person)
+        var extra: ArrayList<DetailInfo> = DetailsAdapter.getExtraData(person, context as Context)
         var urlImage = person?.picture?.large
 
         view?.let {
@@ -93,52 +94,6 @@ class PersonDetailsFragment : Fragment() {
         Log.d(TAG, " ----- inside OnCreateView2")
         // Inflate the layout for this fragment
         return view
-    }
-
-
-
-
-    private fun getExtraData(p: Person?): ArrayList<DetailInfo> {
-        var extra: ArrayList<DetailInfo> = ArrayList()
-
-        extra.add(
-            DetailInfo(
-                getString(R.string.strCompleteName).toUpperCase() + ":",
-                ucFirst(p?.name?.title) + ". " + ucFirst(p?.name?.first) + " " + ucFirst(p?.name?.last)
-            )
-        )
-        extra.add(
-            DetailInfo(
-                getString(R.string.strDocument).toUpperCase() + ":",
-                p?.id?.name + ": " + p?.id?.value
-            )
-        )
-        extra.add(DetailInfo(getString(R.string.strNationality).toUpperCase() + ":", p?.nat))
-        extra.add(DetailInfo(getString(R.string.strEmail).toUpperCase() + ":", p?.email))
-        extra.add(DetailInfo(getString(R.string.strGender).toUpperCase() + ":", p?.gender))
-        extra.add(
-            DetailInfo(
-                getString(R.string.strAge).toUpperCase() + ":",
-                p?.dob?.age.toString()
-            )
-        )
-        extra.add(DetailInfo(getString(R.string.strBornDate).toUpperCase() + ":", p?.dob?.date))
-        extra.add(DetailInfo(getString(R.string.strPhone).toUpperCase() + ":", p?.phone))
-        extra.add(DetailInfo(getString(R.string.strCell).toUpperCase() + ":", p?.cell))
-        extra.add(
-            DetailInfo(
-                getString(R.string.strAddress).toUpperCase() + ":",
-                p?.location?.street?.number + " - " + p?.location?.street?.name + "\n" + p?.location?.city + "\n" + p?.location?.state
-            )
-        )
-        extra.add(
-            DetailInfo(
-                getString(R.string.strPostalCode).toUpperCase() + ":",
-                p?.location?.postcode
-            )
-        )
-
-        return extra
     }
 
     companion object {

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import com.example.johan.person.adapter.DetailInfoRecyclerViewAdapter
+import com.example.johan.person.adapter.DetailsAdapter
 import com.example.johan.person.response.DetailInfo
 import com.example.johan.person.response.MapPerson
 import com.example.johan.person.response.Person
@@ -48,56 +49,13 @@ class PersonDetailsActivity : AppCompatActivity() {
     private fun chargePerson(dataMap: MapPerson?) {
         val person = dataMap?.get(this.personId)
         showDetailsOnUi(person)
-        var extra: ArrayList<DetailInfo> = getExtraData(person)
+        var extra: ArrayList<DetailInfo> = DetailsAdapter.getExtraData(person, this)
         createRecyclerViewReviewList(extra)
 
         var url = person?.picture?.large
 
         imgPerson = findViewById<ImageView>(R.id.imgPersonLarge)
         Picasso.with(this).load(url).into(imgPerson)
-    }
-
-    private fun getExtraData(p: Person?): ArrayList<DetailInfo> {
-        var extra: ArrayList<DetailInfo> = ArrayList()
-
-        extra.add(
-            DetailInfo(
-                getString(R.string.strCompleteName).toUpperCase() + ":",
-                ucFirst(p?.name?.title) + ". " + ucFirst(p?.name?.first) + " " + ucFirst(p?.name?.last)
-            )
-        )
-        extra.add(
-            DetailInfo(
-                getString(R.string.strDocument).toUpperCase() + ":",
-                p?.id?.name + ": " + p?.id?.value
-            )
-        )
-        extra.add(DetailInfo(getString(R.string.strNationality).toUpperCase() + ":", p?.nat))
-        extra.add(DetailInfo(getString(R.string.strEmail).toUpperCase() + ":", p?.email))
-        extra.add(DetailInfo(getString(R.string.strGender).toUpperCase() + ":", p?.gender))
-        extra.add(
-            DetailInfo(
-                getString(R.string.strAge).toUpperCase() + ":",
-                p?.dob?.age.toString()
-            )
-        )
-        extra.add(DetailInfo(getString(R.string.strBornDate).toUpperCase() + ":", p?.dob?.date))
-        extra.add(DetailInfo(getString(R.string.strPhone).toUpperCase() + ":", p?.phone))
-        extra.add(DetailInfo(getString(R.string.strCell).toUpperCase() + ":", p?.cell))
-        extra.add(
-            DetailInfo(
-                getString(R.string.strAddress).toUpperCase() + ":",
-                p?.location?.street?.number + " - " + p?.location?.street?.name + "\n" + p?.location?.city + "\n" + p?.location?.state
-            )
-        )
-        extra.add(
-            DetailInfo(
-                getString(R.string.strPostalCode).toUpperCase() + ":",
-                p?.location?.postcode
-            )
-        )
-
-        return extra
     }
 
     fun showDetailsOnUi(res: Person?) {
