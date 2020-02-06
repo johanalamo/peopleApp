@@ -16,6 +16,8 @@ import com.example.johan.person.adapter.PersonListRecyclerViewAdapter
 import com.example.johan.person.response.MapPerson
 import com.example.johan.person.response.Person
 import com.example.johan.person.viewmodel.PersonListViewModel
+import com.example.johan.person.layoutmanager.AnimatedLinearLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,7 +93,7 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
 
     fun createRecyclerViewPersonList(data: MapPerson, idRecyclerView: Int) {
         view?.let {
-            viewManager = GridLayoutManager(context, cols)
+            viewManager = AnimatedLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             viewAdapter = PersonListRecyclerViewAdapter(data, this)
             recyclerView = it.findViewById<RecyclerView>(idRecyclerView).apply {
                 setHasFixedSize(false)
