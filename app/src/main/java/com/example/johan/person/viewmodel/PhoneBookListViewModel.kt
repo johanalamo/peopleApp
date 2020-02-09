@@ -17,6 +17,8 @@ import java.net.UnknownHostException
 class PersonListViewModel : ViewModel() {
     private val phoneBookList = MutableLiveData<MapPerson>()
 
+    private val TAG = PersonListViewModel::class.java.simpleName
+
     fun loadPersonListData() {
         val client = OkHttpClient()
         val request = Request.Builder().url(ConfigApp.getUrlPersonList()).build()
@@ -31,8 +33,8 @@ class PersonListViewModel : ViewModel() {
                     if (e::class == ConnectException::class) {
                         msg = "ConnectException"
                     }
-                    println("\n\n\n ************************ $msg  \n\n" + e.toString())
-                    Log.d(this::class.java.simpleName, " -------   onFailure")
+                    Log.d(TAG, "onFailure")
+                    phoneBookList.postValue(null)
                 }
 
                 override fun onResponse(call: Call, response: Response) {
@@ -44,6 +46,8 @@ class PersonListViewModel : ViewModel() {
                     val map = results?.associateBy({ it.login?.uuid }, { it })
                     try {
                         phoneBookList.postValue(map)
+                        Log.d(TAG, "onResponse: size -> " + map?.size)
+
                     } catch (e: Exception) {
                         Log.d(
                             this::class.java.simpleName,

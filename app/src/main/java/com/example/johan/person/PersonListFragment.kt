@@ -1,23 +1,24 @@
 package com.example.johan.person
 
+import DataRepository
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.johan.person.adapter.PersonListRecyclerViewAdapter
-import com.example.johan.person.response.MapPerson
-import com.example.johan.person.response.Person
-import com.example.johan.person.viewmodel.PersonListViewModel
 import com.example.johan.person.layoutmanager.AnimatedLinearLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import com.example.johan.person.response.MapPerson
+import com.example.johan.person.viewmodel.PersonListViewModel
+import kotlinx.android.synthetic.main.fragment_person_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,20 +81,53 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        showLoading()
         DataRepository.viewModelPersonList =
             ViewModelProviders.of(this).get(PersonListViewModel::class.java)
+
         DataRepository.viewModelPersonList.getPersonList().observe(
             this,
             Observer { personList ->
-                createRecyclerViewPersonList(personList!!, R.id.rviewPersonList)
+                Log.d(
+                    TAG,
+                    "onActivityCreated: (personList == null) -> " + (personList == null).toString()
+                )
+                if (personList == null) {
+                    showNetworkError()
+                } else {
+                    createRecyclerViewPersonList(personList!!, R.id.rviewPersonList)
+                    showPersonList()
+                }
             }
         )
+
         DataRepository.viewModelPersonList.loadPersonListData()
+    }
+
+    private fun showLoading() {
+        loadingLayout.visibility = View.VISIBLE
+        networkErrorLayout.visibility = View.GONE
+        rviewPersonList.visibility = View.GONE
+        rviewPersonList.isEnabled = false
+    }
+
+    private fun showNetworkError() {
+        loadingLayout.visibility = View.GONE
+        networkErrorLayout.visibility = View.VISIBLE
+        rviewPersonList.visibility = View.GONE
+        rviewPersonList.isEnabled = false
+    }
+
+    private fun showPersonList() {
+        loadingLayout.visibility = View.GONE
+        networkErrorLayout.visibility = View.GONE
+        rviewPersonList.visibility = View.VISIBLE
+        rviewPersonList.isEnabled = true
     }
 
     fun createRecyclerViewPersonList(data: MapPerson, idRecyclerView: Int) {
         view?.let {
-            viewManager = AnimatedLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            viewManager = GridLayoutManager(context, cols)
             viewAdapter = PersonListRecyclerViewAdapter(data, this)
             recyclerView = it.findViewById<RecyclerView>(idRecyclerView).apply {
                 setHasFixedSize(false)
@@ -102,7 +136,6 @@ class PersonListFragment : Fragment(), PersonListRecyclerViewAdapter.ClickListen
             }
         }
     }
-
 
 
     /**

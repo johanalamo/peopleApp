@@ -26,9 +26,9 @@ class PersonListActivity : AppCompatActivity(), PersonListFragment.OnFragmentInt
         fragmentContainer = findViewById<FrameLayout>(R.id.fragment_container)
         isLargeScreen = fragmentContainer != null
 
-        var p_cols = if (isLargeScreen) 2 else 4
+        var cols = if (isLargeScreen) 2 else 4
 
-        personListFragment = PersonListFragment.newInstance(p_cols)
+        personListFragment = PersonListFragment.newInstance(cols)
         personListFragment?.let {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_fragment_container, it, getString(R.string.list_fragment_tag))
