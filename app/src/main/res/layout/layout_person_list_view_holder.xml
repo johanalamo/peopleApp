@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginBottom="4dp"
-    card_view:cardCornerRadius="2dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutOneProduct"
-        android:layout_width="wrap_content"
+    <data>
+        <variable
+            name="person"
+            type="com.example.johan.person.response.Person" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        >
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        card_view:cardCornerRadius="2dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayoutOneProduct"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
             >
 
-            <ImageView
-                android:id="@+id/imgPerson"
-                style="@style/stlImgPersonNormal" />
-
-            <TextView
-                android:id="@+id/txtName"
-                style="@style/stlPersonNameNormal"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/imgPerson"
+                    style="@style/stlImgPersonNormal" />
+
+                <TextView
+                    android:id="@+id/txtName"
+                    style="@style/stlPersonNameNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{person.name.first}" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</layout>

@@ -86,8 +86,8 @@ class PersonDetailsFragment : Fragment() {
 
             Log.d(TAG, " ----- inside view2")
             imgPerson = it.findViewById<ImageView>(R.id.imgPersonLarge)
-            Picasso.with(context).load(urlImage).into(imgPerson)
 
+            Picasso.get().load(urlImage).into(imgPerson)
         }
 
 

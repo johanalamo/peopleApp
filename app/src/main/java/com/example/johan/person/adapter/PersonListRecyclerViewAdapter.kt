@@ -1,5 +1,6 @@
 package com.example.johan.person.adapter
 
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.johan.person.R
+import com.example.johan.person.databinding.LayoutPersonListViewHolderBinding
 import com.example.johan.person.response.MapPerson
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -25,15 +27,19 @@ class PersonListRecyclerViewAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_person_list_view_holder, parent, false) as View
-        return ViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<LayoutPersonListViewHolderBinding>(layoutInflater,
+            R.layout.layout_person_list_view_holder, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PersonListRecyclerViewAdapter.ViewHolder, position: Int) {
-        holder.updateImageWithUrl(data[position].picture?.thumbnail)
-        holder.view.txtName.text = data[position].name?.first
-        holder.view.setOnClickListener {
+        val person = data[position]
+
+        holder.binding.person = person
+        Picasso.get().load(person.picture?.thumbnail).into(holder.binding.imgPerson)
+
+        holder.binding.root.setOnClickListener {
             clickListener.listItemClicked(data[position].login?.uuid)
         }
         Log.d(TAG, " ------  PersonListRecyclerViewAdapter.onBindViewHolder.position = " + position.toString())
@@ -47,17 +53,6 @@ class PersonListRecyclerViewAdapter(
     }
 
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        private val myImageView: ImageView = itemView.findViewById<ImageView>(R.id.imgPerson)
+    class ViewHolder(val binding: LayoutPersonListViewHolderBinding): RecyclerView.ViewHolder(binding.root)
 
-        fun updateImageWithUrl(url: String?) {
-            Picasso.with(itemView.context).load(url).into(
-                myImageView,
-                object : Callback {
-                    override fun onSuccess() {}
-                    override fun onError() {}
-                }
-            )
-        }
-    }
 }
