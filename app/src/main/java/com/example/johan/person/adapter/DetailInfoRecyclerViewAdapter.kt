@@ -1,10 +1,12 @@
 package com.example.johan.person.adapter
 
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.johan.person.R
+import com.example.johan.person.databinding.LayoutDetailinfoListViewHolderBinding
 import com.example.johan.person.response.DetailInfo
 import kotlinx.android.synthetic.main.layout_detailinfo_list_view_holder.view.*
 
@@ -18,19 +20,22 @@ class DetailInfoRecyclerViewAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_detailinfo_list_view_holder, parent, false) as View
-        return ViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<LayoutDetailinfoListViewHolderBinding>(layoutInflater,
+            R.layout.layout_detailinfo_list_view_holder, parent, false)
+        return ViewHolder(binding)
     }
 
+
     override fun onBindViewHolder(holder: DetailInfoRecyclerViewAdapter.ViewHolder, position: Int) {
-        holder.view.txtTitle.text = data[position].field
-        holder.view.txtValue.text = data[position].value
+        val data = data[position]
+        holder.binding.info = data
     }
+
 
     override fun getItemCount() = data.size
 
     //internal objects and interfaces
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(val binding: LayoutDetailinfoListViewHolderBinding) : RecyclerView.ViewHolder(binding.root)
 
 }
